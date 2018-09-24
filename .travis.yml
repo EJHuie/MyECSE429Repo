@@ -1,3 +1,25 @@
 language: java
+#script:
+#- mvn clean install
+
+language: java
+sudo: false
+install: true
+
+addons:
+  sonarcloud:
+    organization: "[ejhuie-github]"
+    token:
+      secure: "[154a781c21d4e296776d0cda402cc2086d8e1b31]"
+
+
+jdk:
+  - oraclejdk8
+
 script:
-- mvn clean install
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
